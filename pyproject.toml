@@ -33,7 +33,7 @@ ignore = [
 "backend/**/*.py" = ["ALL"]   # legacy directory, not actively maintained
 
 [tool.ruff.lint.isort]
-known-first-party = ["src", "etl"]
+known-first-party = ["src", "etl", "jobs"]
 split-on-trailing-comma = true
 
 [tool.ruff.format]

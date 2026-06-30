@@ -33,3 +33,4 @@ mobile/.expo/
 
 # Claude Code personal preferences (not shared)
 CLAUDE.local.md
+.claude/settings.local.json
