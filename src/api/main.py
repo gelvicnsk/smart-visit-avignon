@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 from fastapi.responses import Response
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, generate_latest
 
 app = FastAPI(
     title="Smart Visit Avignon API",
