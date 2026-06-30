@@ -28,6 +28,7 @@ class ValidationError(SmartVisitException):
 
 # ── FastAPI exception handlers ────────────────────────────────────
 
+
 async def smartvisit_exception_handler(
     request: Request,
     exc: SmartVisitException,

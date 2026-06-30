@@ -71,6 +71,7 @@ async def close_all() -> None:
 
 # ── FastAPI dependency injectors ──────────────────────────────────
 
+
 def get_mongo_db() -> AsyncIOMotorDatabase | None:
     """Inject the active MongoDB database. Returns None when unavailable."""
     if _mongo_client is None:

@@ -45,14 +45,14 @@ install-dev: ## Install development dependencies
 
 # ── Code Quality ──────────────────────────────────────────────────
 
-lint: ## Run Ruff linter
-	$(PYTHON) -m ruff check src/ tests/
+lint: ## Run Ruff linter (src + etl + tests)
+	$(PYTHON) -m ruff check src/ etl/ tests/
 
-format: ## Run Ruff formatter
-	$(PYTHON) -m ruff format src/ tests/
+format: ## Run Ruff formatter (src + etl + tests)
+	$(PYTHON) -m ruff format src/ etl/ tests/
 
 lint-fix: ## Run Ruff linter with auto-fix
-	$(PYTHON) -m ruff check --fix src/ tests/
+	$(PYTHON) -m ruff check --fix src/ etl/ tests/
 
 # ── Tests ─────────────────────────────────────────────────────────
 
