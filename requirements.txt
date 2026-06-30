@@ -10,3 +10,5 @@ python-dotenv
 geopy
 osmnx
 networkx
+pytest
+httpx
