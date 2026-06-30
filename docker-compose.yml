@@ -1,0 +1,109 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: smartvisit_api
+    ports:
+      - "8005:8000"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+      - neo4j
+      - redis
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  spark-master:
+    image: apache/spark:3.5.1
+    container_name: smartvisit_spark_master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    command: >
+      /opt/spark/bin/spark-class
+      org.apache.spark.deploy.master.Master
+      --host 0.0.0.0
+
+  spark-worker:
+    image: apache/spark:3.5.1
+    container_name: smartvisit_spark_worker
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    command: >
+      /opt/spark/bin/spark-class
+      org.apache.spark.deploy.worker.Worker
+      spark://spark-master:7077
+
+  mongodb:
+    image: mongo:7
+    container_name: smartvisit_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  neo4j:
+    image: neo4j:5
+    container_name: smartvisit_neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password123
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
+  redis:
+    image: redis:7
+    container_name: smartvisit_redis
+    ports:
+      - "6379:6379"
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/dashboard/Dockerfile
+    container_name: smartvisit_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    env_file:
+      - .env
+    depends_on:
+      - api
+    command: streamlit run src/dashboard/app.py --server.address=0.0.0.0 --server.port=8501
+
+  prometheus:
+    image: prom/prometheus
+    container_name: smartvisit_prometheus
+    ports:
+      - "9095:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - api
+
+  grafana:
+    image: grafana/grafana
+    container_name: smartvisit_grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  mongodb_data:
+  neo4j_data:
+  neo4j_logs:
+  grafana_data:

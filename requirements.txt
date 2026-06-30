@@ -1,0 +1,12 @@
+pandas
+numpy
+pyspark
+pymongo
+neo4j
+fastapi
+uvicorn
+requests
+python-dotenv
+geopy
+osmnx
+networkx
