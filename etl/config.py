@@ -44,8 +44,12 @@ class ETLConfig(BaseSettings):
     open_agenda_api_url: str = "https://api.openagenda.com/v2"
     # Festival d'Avignon public UID on Open Agenda
     open_agenda_festival_uid: str = "19611607"
+    # Set in .env — empty string triggers automatic fixture fallback
+    open_agenda_api_key: str = ""
     overpass_api_url: str = "https://overpass-api.de/api/interpreter"
     osrm_api_url: str = "http://router.project-osrm.org/route/v1/driving/"
+    # JCDecaux API key for Vélopop bike stations — empty → fixture fallback
+    jcdecaux_api_key: str = ""
 
     # ── Ingestion behaviour ───────────────────────────────────────
     api_timeout_seconds: int = 30
