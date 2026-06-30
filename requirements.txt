@@ -5,8 +5,8 @@ pydantic==2.9.2
 pydantic-settings==2.6.1
 
 # ── Database Clients ──────────────────────────────────────────────
-pymongo==4.8.0
-motor==3.5.0
+pymongo==4.10.1
+motor==3.6.0
 neo4j==5.23.1
 redis==5.0.8
 
