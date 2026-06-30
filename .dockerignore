@@ -1,0 +1,53 @@
+# ── Secrets ───────────────────────────────────────────────────────
+.env
+.env.local
+
+# ── Python ────────────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Tests & Quality ───────────────────────────────────────────────
+tests/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ── Data & Notebooks ──────────────────────────────────────────────
+data/raw/
+data/processed/
+data/curated/
+notebooks/
+*.ipynb
+
+# ── Documentation ─────────────────────────────────────────────────
+docs/
+*.pdf
+*.md
+*.rst
+
+# ── Git ───────────────────────────────────────────────────────────
+.git/
+.gitignore
+
+# ── IDE & OS ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Claude Code ───────────────────────────────────────────────────
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+
+# ── Misc ──────────────────────────────────────────────────────────
+*.log
+*.Zone.Identifier
